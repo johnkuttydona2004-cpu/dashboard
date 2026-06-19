@@ -61,7 +61,4 @@ if st.button("Generate Report"):
     st.write("Activity:", activity)
     st.write("Family History:", family_history)
 
-    import joblib
-    import numpy as np
-
-    model = joblib.load("C:\Users\johnk\Downloads\model (1).pkl")
+    
