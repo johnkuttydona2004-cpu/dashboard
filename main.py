@@ -38,7 +38,7 @@ family_history = st.selectbox("Family History of CVD", ["No", "Yes"])
 
 st.header("📊 Clinical Output")
 
-if st.button("Generate Risk Report"):
+if st.button("Generate Report"):
 
     st.subheader("📋 Patient Summary")
 
@@ -60,25 +60,4 @@ if st.button("Generate Risk Report"):
     st.write("Activity:", activity)
     st.write("Family History:", family_history)
 
-    # Simple risk logic
-    risk = 0
-
-    if sys_bp > 140:
-        risk += 1
-    if chol > 240:
-        risk += 1
-    if glucose > 140:
-        risk += 1
-    if smoking == "Yes":
-        risk += 1
-    if diabetes == "Yes":
-        risk += 1
-
-    st.subheader("⚠ Risk Result")
-
-    if risk >= 3:
-        st.error("HIGH CVD RISK")
-    elif risk == 2:
-        st.warning("MODERATE CVD RISK")
-    else:
-        st.success("LOW CVD RISK")
+    st.success("Report generated successfully (ML model will be added next)")
