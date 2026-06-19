@@ -1,34 +1,84 @@
 import streamlit as st
-import pandas as pd
 
-# Page setup
-st.set_page_config(page_title="Clinical Dashboard", layout="wide")
+st.set_page_config(page_title="Clinical Input Dashboard", layout="wide")
 
-# Title
-st.title("🩺 Clinical Dashboard")
+st.title("🩺 Doctor Clinical Input Dashboard")
 
-# Upload section
-st.write("Upload patient CSV file to begin analysis")
+st.header("👤 Patient Information")
 
-uploaded_file = st.file_uploader("Choose CSV file", type=["csv"])
+sex = st.selectbox("Sex", ["Male", "Female", "Other"])
+age = st.slider("Age", 0, 120, 30)
 
-# If file is uploaded
-if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+weight = st.number_input("Weight (kg)", 0.0, 200.0, 70.0)
+height = st.number_input("Height (cm)", 50.0, 220.0, 170.0)
 
-    st.success("File uploaded successfully!")
+st.header("💓 Blood Pressure")
 
-    # Show data
-    st.subheader("📊 Patient Data")
-    st.dataframe(df)
+bp_category = st.selectbox(
+    "Blood Pressure Category",
+    ["Normal", "Elevated", "Stage 1 Hypertension", "Stage 2 Hypertension"]
+)
 
-    # Basic statistics
-    st.subheader("📌 Summary Statistics")
-    st.write(df.describe())
+sys_bp = st.slider("Systolic BP", 80, 250, 120)
+dia_bp = st.slider("Diastolic BP", 40, 150, 80)
 
-    # Column info
-    st.subheader("📋 Column Info")
-    st.write(df.dtypes)
+st.header("🧪 Lab Results")
 
-else:
-    st.info("Waiting for file upload...")
+chol = st.slider("Total Cholesterol (mg/dL)", 100, 500, 200)
+hdl = st.slider("HDL (mg/dL)", 20, 100, 50)
+ldl = st.slider("LDL (mg/dL)", 50, 300, 120)
+glucose = st.slider("Fasting Blood Sugar (mg/dL)", 50, 300, 100)
+
+st.header("🧍 Lifestyle Factors")
+
+smoking = st.selectbox("Smoking Status", ["No", "Yes"])
+diabetes = st.selectbox("Diabetes Status", ["No", "Yes"])
+activity = st.selectbox("Physical Activity Level", ["Low", "Moderate", "High"])
+family_history = st.selectbox("Family History of CVD", ["No", "Yes"])
+
+st.header("📊 Clinical Output")
+
+if st.button("Generate Risk Report"):
+
+    st.subheader("📋 Patient Summary")
+
+    st.write("Sex:", sex)
+    st.write("Age:", age)
+    st.write("Weight:", weight)
+    st.write("Height:", height)
+
+    st.write("BP Category:", bp_category)
+    st.write("BP:", sys_bp, "/", dia_bp)
+
+    st.write("Cholesterol:", chol)
+    st.write("HDL:", hdl)
+    st.write("LDL:", ldl)
+    st.write("Glucose:", glucose)
+
+    st.write("Smoking:", smoking)
+    st.write("Diabetes:", diabetes)
+    st.write("Activity:", activity)
+    st.write("Family History:", family_history)
+
+    # Simple risk logic
+    risk = 0
+
+    if sys_bp > 140:
+        risk += 1
+    if chol > 240:
+        risk += 1
+    if glucose > 140:
+        risk += 1
+    if smoking == "Yes":
+        risk += 1
+    if diabetes == "Yes":
+        risk += 1
+
+    st.subheader("⚠ Risk Result")
+
+    if risk >= 3:
+        st.error("HIGH CVD RISK")
+    elif risk == 2:
+        st.warning("MODERATE CVD RISK")
+    else:
+        st.success("LOW CVD RISK")
