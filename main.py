@@ -64,4 +64,4 @@ if st.button("Generate Report"):
     import joblib
     import numpy as np
 
-    model = joblib.load("model.pkl")
+    model = joblib.load("C:\Users\johnk\Downloads\model (1).pkl")
