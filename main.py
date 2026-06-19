@@ -1,114 +1,63 @@
+import streamlit as st
 
-  import streamlit as st
+st.set_page_config(page_title="Clinical Input Dashboard", layout="wide")
 
-# ================= PAGE CONFIG =================
-st.set_page_config(
-    page_title="Clinical Dashboard",
-    layout="wide",
-    initial_sidebar_state="expanded"
+st.title("🩺 Doctor Clinical Input Dashboard")
+
+st.header("👤 Patient Information")
+
+sex = st.selectbox("Sex", ["Male", "Female", "Other"])
+age = st.slider("Age", 0, 120, 30)
+
+weight = st.number_input("Weight (kg)", 0.0, 200.0, 70.0)
+height = st.number_input("Height (cm)", 50.0, 220.0, 170.0)
+
+st.header("💓 Blood Pressure")
+
+bp_category = st.selectbox(
+    "Blood Pressure Category",
+    ["Normal", "Elevated", "Stage 1 Hypertension", "Stage 2 Hypertension"]
 )
 
-# ================= CUSTOM STYLE =================
-st.markdown("""
-    <style>
-        .main {
-            background-color: #0f172a;
-        }
-        h1, h2, h3 {
-            color: #ffffff;
-        }
-        .stApp {
-            background-color: #0f172a;
-        }
-        .block-container {
-            padding-top: 2rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
+sys_bp = st.slider("Systolic BP", 80, 250, 120)
+dia_bp = st.slider("Diastolic BP", 40, 150, 80)
 
-# ================= HEADER =================
-st.title("🩺 Clinical Decision Support Dashboard")
-st.markdown("### AI-ready patient assessment system")
+st.header("🧪 Lab Results")
 
-st.divider()
+chol = st.slider("Total Cholesterol (mg/dL)", 100, 500, 200)
+hdl = st.slider("HDL (mg/dL)", 20, 100, 50)
+ldl = st.slider("LDL (mg/dL)", 50, 300, 120)
+glucose = st.slider("Fasting Blood Sugar (mg/dL)", 50, 300, 100)
 
-# ================= SIDEBAR =================
-with st.sidebar:
-    st.header("⚙ Control Panel")
-    st.info("Enter patient details and generate clinical report")
+st.header("🧍 Lifestyle Factors")
 
-    view_mode = st.selectbox("View Mode", ["Compact", "Standard", "Detailed"])
+smoking = st.selectbox("Smoking Status", ["No", "Yes"])
+diabetes = st.selectbox("Diabetes Status", ["No", "Yes"])
+activity = st.selectbox("Physical Activity Level", ["Low", "Moderate", "High"])
+family_history = st.selectbox("Family History of CVD", ["No", "Yes"])
 
-    st.divider()
-    st.write("📌 Powered by Streamlit")
+st.header("📊 Clinical Output")
 
-# ================= LAYOUT =================
-col1, col2, col3 = st.columns(3)
+if st.button("Generate Report"):
 
-# ========== PATIENT INFO ==========
-with col1:
-    st.subheader("👤 Patient Information")
+    st.subheader("📋 Patient Summary")
 
-    sex = st.selectbox("Sex", ["Male", "Female", "Other"])
-    age = st.slider("Age", 0, 120, 30)
+    st.write("Sex:", sex)
+    st.write("Age:", age)
+    st.write("Weight:", weight)
+    st.write("Height:", height)
 
-    weight = st.number_input("Weight (kg)", 0.0, 200.0, 70.0)
-    height = st.number_input("Height (cm)", 50.0, 220.0, 170.0)
+    st.write("BP Category:", bp_category)
+    st.write("BP:", sys_bp, "/", dia_bp)
 
-# ========== CARDIO ==========
-with col2:
-    st.subheader("💓 Cardiovascular")
+    st.write("Cholesterol:", chol)
+    st.write("HDL:", hdl)
+    st.write("LDL:", ldl)
+    st.write("Glucose:", glucose)
 
-    bp_category = st.selectbox(
-        "Blood Pressure Category",
-        ["Normal", "Elevated", "Stage 1 Hypertension", "Stage 2 Hypertension"]
-    )
+    st.write("Smoking:", smoking)
+    st.write("Diabetes:", diabetes)
+    st.write("Activity:", activity)
+    st.write("Family History:", family_history)
 
-    sys_bp = st.slider("Systolic BP", 80, 250, 120)
-    dia_bp = st.slider("Diastolic BP", 40, 150, 80)
-
-    chol = st.slider("Total Cholesterol (mg/dL)", 100, 500, 200)
-
-# ========== LAB + LIFESTYLE ==========
-with col3:
-    st.subheader("🧪 Lab & Lifestyle")
-
-    hdl = st.slider("HDL (mg/dL)", 20, 100, 50)
-    ldl = st.slider("LDL (mg/dL)", 50, 300, 120)
-    glucose = st.slider("Fasting Blood Sugar", 50, 300, 100)
-
-    smoking = st.selectbox("Smoking Status", ["No", "Yes"])
-    diabetes = st.selectbox("Diabetes Status", ["No", "Yes"])
-    activity = st.selectbox("Physical Activity Level", ["Low", "Moderate", "High"])
-    family_history = st.selectbox("Family History of CVD", ["No", "Yes"])
-
-st.divider()
-
-# ================= ACTION =================
-if st.button("🧠 Generate Clinical Report", use_container_width=True):
-
-    st.success("Report Generated Successfully")
-
-    colA, colB = st.columns(2)
-
-    with colA:
-        st.subheader("👤 Patient Summary")
-        st.write("Sex:", sex)
-        st.write("Age:", age)
-        st.write("Weight:", weight)
-        st.write("Height:", height)
-
-    with colB:
-        st.subheader("💓 Medical Data")
-        st.write("BP Category:", bp_category)
-        st.write("BP:", sys_bp, "/", dia_bp)
-        st.write("Cholesterol:", chol)
-        st.write("HDL:", hdl)
-        st.write("LDL:", ldl)
-        st.write("Glucose:", glucose)
-
-    st.divider()
-
-    st.info("🧠 Ready for ML model integration (next step)")
+    st.success("Report generated successfully (ML model will be added next)"). in thi include page layout desigh make it more aesthetic
