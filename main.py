@@ -60,4 +60,4 @@ if st.button("Generate Report"):
     st.write("Activity:", activity)
     st.write("Family History:", family_history)
 
-    st.success("Report generated successfully (ML model will be added next)"). in thi include page layout desigh make it more aesthetic
+    st.success("Report generated successfully (ML model will be added next)")
