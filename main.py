@@ -4,7 +4,6 @@ import streamlit as st
 st.set_page_config(page_title="Clinical Input Dashboard", layout="wide")
 
 st.title("🩺 Doctor Clinical Input Dashboard")
-
 st.header("👤 Patient Information")
 
 sex = st.selectbox("Sex", ["Male", "Female", "Other"])
