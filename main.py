@@ -1,5 +1,8 @@
-
 import streamlit as st
+import joblib
+import numpy as np
+model = joblib.load("model.pkl")
+
 st.title("Clinical Dashboard")
 
 st.set_page_config(page_title="Clinical Input Dashboard", layout="wide")
