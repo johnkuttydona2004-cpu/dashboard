@@ -1,4 +1,3 @@
-pip install streamlit joblib numpy
 import streamlit as st
 
 st.set_page_config(page_title="Clinical Input Dashboard", layout="wide")
